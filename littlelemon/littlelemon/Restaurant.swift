@@ -9,9 +9,11 @@ import SwiftUI
 
 @main
 struct Restaurant: App {
+    @StateObject private var auth = Auth()
+    
     var body: some Scene {
         WindowGroup {
-            ContentView()
+            Onboarding()
         }
     }
 }

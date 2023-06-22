@@ -8,17 +8,25 @@
 
 /* Begin PBXBuildFile section */
 		919676382A3FADEA00C863FB /* Restaurant.swift in Sources */ = {isa = PBXBuildFile; fileRef = 919676372A3FADEA00C863FB /* Restaurant.swift */; };
-		9196763A2A3FADEA00C863FB /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 919676392A3FADEA00C863FB /* ContentView.swift */; };
 		9196763C2A3FADEC00C863FB /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 9196763B2A3FADEC00C863FB /* Assets.xcassets */; };
 		9196763F2A3FADEC00C863FB /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 9196763E2A3FADEC00C863FB /* Preview Assets.xcassets */; };
+		919676462A4299E500C863FB /* Onboarding.swift in Sources */ = {isa = PBXBuildFile; fileRef = 919676452A4299E500C863FB /* Onboarding.swift */; };
+		9196764A2A4357D800C863FB /* Home.swift in Sources */ = {isa = PBXBuildFile; fileRef = 919676492A4357D800C863FB /* Home.swift */; };
+		9196764C2A43593400C863FB /* Menu.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9196764B2A43593400C863FB /* Menu.swift */; };
+		9196764E2A43BFC600C863FB /* UserProfile.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9196764D2A43BFC600C863FB /* UserProfile.swift */; };
+		919676502A44D51300C863FB /* AuthenticationClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9196764F2A44D51300C863FB /* AuthenticationClass.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
 		919676342A3FADEA00C863FB /* littlelemon.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = littlelemon.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		919676372A3FADEA00C863FB /* Restaurant.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Restaurant.swift; sourceTree = "<group>"; };
-		919676392A3FADEA00C863FB /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
 		9196763B2A3FADEC00C863FB /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		9196763E2A3FADEC00C863FB /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
+		919676452A4299E500C863FB /* Onboarding.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Onboarding.swift; sourceTree = "<group>"; };
+		919676492A4357D800C863FB /* Home.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Home.swift; sourceTree = "<group>"; };
+		9196764B2A43593400C863FB /* Menu.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Menu.swift; sourceTree = "<group>"; };
+		9196764D2A43BFC600C863FB /* UserProfile.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserProfile.swift; sourceTree = "<group>"; };
+		9196764F2A44D51300C863FB /* AuthenticationClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthenticationClass.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -52,7 +60,11 @@
 			isa = PBXGroup;
 			children = (
 				919676372A3FADEA00C863FB /* Restaurant.swift */,
-				919676392A3FADEA00C863FB /* ContentView.swift */,
+				919676452A4299E500C863FB /* Onboarding.swift */,
+				9196764D2A43BFC600C863FB /* UserProfile.swift */,
+				9196764F2A44D51300C863FB /* AuthenticationClass.swift */,
+				919676492A4357D800C863FB /* Home.swift */,
+				9196764B2A43593400C863FB /* Menu.swift */,
 				9196763B2A3FADEC00C863FB /* Assets.xcassets */,
 				9196763D2A3FADEC00C863FB /* Preview Content */,
 			);
@@ -137,8 +149,12 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				9196763A2A3FADEA00C863FB /* ContentView.swift in Sources */,
+				919676502A44D51300C863FB /* AuthenticationClass.swift in Sources */,
+				919676462A4299E500C863FB /* Onboarding.swift in Sources */,
 				919676382A3FADEA00C863FB /* Restaurant.swift in Sources */,
+				9196764E2A43BFC600C863FB /* UserProfile.swift in Sources */,
+				9196764A2A4357D800C863FB /* Home.swift in Sources */,
+				9196764C2A43593400C863FB /* Menu.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
