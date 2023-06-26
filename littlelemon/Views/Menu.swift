@@ -10,6 +10,7 @@ import CoreData
 
 struct Menu: View {
     @Environment(\.managedObjectContext) private var viewContext
+    @State var searchText = ""
     
     var body: some View {
         VStack (spacing: 10) {
@@ -19,32 +20,35 @@ struct Menu: View {
                 .font(.headline)
             Text("Your local mediterranean Bistro")
             Spacer()
-            FetchedObjects<Dish, AnyView>(content: { (dishes: [Dish]) in
-                AnyView(
-                    List(dishes, id: \.self) { dish in
-                        HStack {
-                            Text("\(dish.title ?? ""),  \(dish.price ?? "")")
-                            AsyncImage(url: URL(string: dish.image ?? "")){ phase in
-                                switch phase {
-                                case .success(let image):
-                                    image
-                                        .resizable()
-                                        .aspectRatio(contentMode: .fit)
-                                        .frame(width: 50, height: 50)
-                                default:
-                                    // Placeholder image in case of failure
-                                    Image(systemName: "photo")
-                                        .resizable()
-                                        .aspectRatio(contentMode: .fit)
-                                        .frame(width: 50, height: 100)
+            NavigationStack {
+                FetchedObjects<Dish, AnyView>(predicate: buildPredicate(), sortDescriptors: buildSortDescriptors(), content: { (dishes: [Dish]) in
+                    AnyView(
+                        List(dishes, id: \.self) { dish in
+                            HStack {
+                                Text("\(dish.title ?? ""),  \(dish.price ?? "")")
+                                AsyncImage(url: URL(string: dish.image ?? "")){ phase in
+                                    switch phase {
+                                    case .success(let image):
+                                        image
+                                            .resizable()
+                                            .aspectRatio(contentMode: .fit)
+                                            .frame(width: 50, height: 50)
+                                    default:
+                                        // Placeholder image in case of failure
+                                        Image(systemName: "photo")
+                                            .resizable()
+                                            .aspectRatio(contentMode: .fit)
+                                            .frame(width: 50, height: 100)
+                                    }
                                 }
                             }
-                        }
-                    })
+                        })
                 })
             }
-        .onAppear(perform: {getMenuData()})
-
+            .searchable(text: $searchText, prompt: "Search")
+        }
+            .onAppear(perform: {getMenuData()})
+        
         }
     
     //MARK: - Helper Functions
@@ -88,6 +92,21 @@ struct Menu: View {
             print("Failed to fetch dishes: \(error)")
         }
     }
-
-
+    
+    
+    func buildSortDescriptors() -> [NSSortDescriptor] {
+        return( [
+            NSSortDescriptor(key: "title", ascending: true, selector:
+                                #selector(NSString.localizedStandardCompare)),
+        ])
+    }
+    
+    func buildPredicate() -> NSPredicate {
+        if searchText.isEmpty {
+            return(NSPredicate(value: true))
+        }
+        return (
+            NSPredicate(format: "title CONTAINS[cd] %@", searchText)
+        )
+    }
 }
