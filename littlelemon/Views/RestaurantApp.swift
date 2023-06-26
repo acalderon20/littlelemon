@@ -8,8 +8,7 @@
 import SwiftUI
 
 @main
-struct Restaurant: App {
-    @StateObject private var auth = Auth()
+struct RestaurantApp: App {
     
     var body: some Scene {
         WindowGroup {
