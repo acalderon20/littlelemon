@@ -8,18 +8,44 @@
 import SwiftUI
 import CoreData
 
+
+struct MenuBreakdown: View {
+    @Binding var selectedCategory: String
+    var categories = ["Starters", "Mains", "Desserts", "Sides"]
+    
+    var body: some View {
+        
+        VStack {
+            Text("Order for Delivery!")
+                .fontWeight(.bold)
+                .foregroundColor(.black)
+                
+                .frame(width: 360, height: 32, alignment: .leading)
+            HStack (spacing: 20){
+                ForEach(categories, id: \.self) {category in
+                    Button(category) {
+//                        selectedCategory = category
+                    }
+                    .padding(10)
+                    .background(selectedCategory == category ? Color.secondary: Color(red: 0.93, green: 0.94, blue: 0.93))
+                    .cornerRadius(8)
+                    .foregroundColor(.black)
+                    .fontWeight(.bold)
+                }
+            }
+        }
+    }
+}
+
 struct Menu: View {
     @Environment(\.managedObjectContext) private var viewContext
     @State var searchText = ""
+    @State var selectedCategory = ""
     
     var body: some View {
         VStack (spacing: 10) {
-            Text("Little Lemon Application")
-                .font(.title)
-            Text("Chicago")
-                .font(.headline)
-            Text("Your local mediterranean Bistro")
-            Spacer()
+            Hero()
+            MenuBreakdown(selectedCategory: $selectedCategory)
             NavigationStack {
                 FetchedObjects<Dish, AnyView>(predicate: buildPredicate(), sortDescriptors: buildSortDescriptors(), content: { (dishes: [Dish]) in
                     AnyView(
@@ -102,11 +128,17 @@ struct Menu: View {
     }
     
     func buildPredicate() -> NSPredicate {
-        if searchText.isEmpty {
-            return(NSPredicate(value: true))
+            var predicates = [NSPredicate]()
+            
+            if !searchText.isEmpty {
+                predicates.append(NSPredicate(format: "title CONTAINS[cd] %@", searchText))
+            }
+        
+//            if !selectedCategory.isEmpty {
+//                predicates.append(NSPredicate(format: "category == %@", selectedCategory))
+//                print(selectedCategory)
+//            }
+            
+            return NSCompoundPredicate(andPredicateWithSubpredicates: predicates)
         }
-        return (
-            NSPredicate(format: "title CONTAINS[cd] %@", searchText)
-        )
-    }
 }

@@ -19,12 +19,6 @@ struct Onboarding: View {
     @State private var firstName: String = ""
     @State private var lastName: String = ""
     @State private var email: String = ""
-    @State private var destination: [ViewType] = []
-    
-    
-    enum ViewType: Hashable {
-        case home
-    }
     
     func isValidEmail(_ email: String) -> Bool {
         let emailRegex = "[A-Z0-9a-z._%+-]+@[A-Za-z0-9.-]+\\.[A-Za-z]{2,64}"
@@ -33,37 +27,49 @@ struct Onboarding: View {
     }
     
     var body: some View {
-        NavigationView {
-            VStack {
+        
+        VStack {
+            NavigationView {
                 VStack {
-                    NavigationLink(destination: Home(), isActive: $isLoggedIn) {
-                        EmptyView()
+                    VStack {
+                        NavigationLink(destination: Home(), isActive: $isLoggedIn) {
+                            EmptyView()
+                        }
+                        VStack {
+                            Image("Logo")
+                            Hero()
+                        }
+                        Spacer()
+                        VStack {
+                            TextField("First Name", text: $firstName)
+                                .textFieldStyle(RoundedBorderTextFieldStyle())
+                            
+                            TextField("Last Name", text: $lastName)
+                                .textFieldStyle(RoundedBorderTextFieldStyle())
+                            TextField("Email", text: $email)
+                                .keyboardType(.emailAddress)
+                                .autocorrectionDisabled()
+                                .textFieldStyle(RoundedBorderTextFieldStyle())
+                            Button("Register") {
+                                UserDefaults.standard.set(firstName, forKey: kFirstName)
+                                UserDefaults.standard.set(lastName, forKey: kLastName)
+                                UserDefaults.standard.set(email, forKey: kEmail)
+                                UserDefaults.standard.set(true, forKey: "kIsLoggedIn")
+                                isLoggedIn = true
+                            }
+                            .disabled(firstName.isEmpty || lastName.isEmpty || !isValidEmail(email))
+                        }
+                        .padding(100)
+                        Spacer()
                     }
-                    TextField("First Name", text: $firstName)
-                        .textFieldStyle(RoundedBorderTextFieldStyle())
-                    TextField("Last Name", text: $lastName)
-                        .textFieldStyle(RoundedBorderTextFieldStyle())
-                    TextField("Email", text: $email)
-                        .keyboardType(.emailAddress)
-                        .autocorrectionDisabled()
-                        .textFieldStyle(RoundedBorderTextFieldStyle())
-                    Button("Register") {
-                        UserDefaults.standard.set(firstName, forKey: kFirstName)
-                        UserDefaults.standard.set(lastName, forKey: kLastName)
-                        UserDefaults.standard.set(email, forKey: kEmail)
-                        UserDefaults.standard.set(true, forKey: "kIsLoggedIn")
+                }
+                .onAppear(perform: {
+                    if UserDefaults.standard.bool(forKey: "kIsLoggedIn") == true{
                         isLoggedIn = true
                     }
-                    .disabled(firstName.isEmpty || lastName.isEmpty || !isValidEmail(email))
-                }
+                })
+                Spacer()
             }
-            .padding(100)
-            .onAppear(perform: {
-                if UserDefaults.standard.bool(forKey: "kIsLoggedIn") == true{
-                    isLoggedIn = true
-                }
-            })
-            Spacer()
         }
     }
 }

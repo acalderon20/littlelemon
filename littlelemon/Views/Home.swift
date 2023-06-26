@@ -7,24 +7,26 @@
 
 import SwiftUI
 
-
 struct Home: View {
     let persistence = PersistenceController.shared
     
     var body: some View {
         
-        TabView {
-            Menu()
-                .environment(\.managedObjectContext, persistence.container.viewContext)
-                .tabItem{
-                    Label("Menu", systemImage: "menucard")
-                }
-            UserProfile()
-                .tabItem{
-                    Label("Profile", systemImage: "person.crop.circle")
-                }
+        VStack {
+            Header()
+            TabView {
+                Menu()
+                    .environment(\.managedObjectContext, persistence.container.viewContext)
+                    .tabItem{
+                        Label("Menu", systemImage: "menucard")
+                    }
+                UserProfile()
+                    .tabItem{
+                        Label("Profile", systemImage: "person.crop.circle")
+                    }
+            }
+            .navigationBarBackButtonHidden(true)
         }
-        .navigationBarBackButtonHidden(true)
         
     }
 }
