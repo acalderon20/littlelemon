@@ -14,8 +14,6 @@ let kIsLoggedIn = "kIsLoggedIn"
 
 struct Onboarding: View {
     
-    @EnvironmentObject var auth: Auth
-//    @State var isLoggedIn: Bool? = nil
     @State var isLoggedIn = false
     
     @State private var firstName: String = ""
