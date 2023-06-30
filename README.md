@@ -1,3 +1,3 @@
 # littlelemon
 
-- This will be a repository that holds my iOS Capstone Project from the Meta iOS Developer Certificate. I'm excited to start working on it!
+This is a repository that hold my iOS Capstone app for the Meta iOS Developer Certificate. Working on updating some styling for the app
